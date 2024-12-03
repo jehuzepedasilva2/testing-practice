@@ -4,9 +4,9 @@ const helloString = 'hello';
 const myName = 'jehu';
 
 test('capitalize "hello"', () => {
-  expect(fft.capitalize(helloString)).toMatch(/Hello/);
+  expect(ftt.capitalize(helloString)).toMatch(/Hello/);
 })
 
 test('capitalize my name', () => {
-  expect(fft.capitalize(myName)).toMatch(/Jehu/);
+  expect(ftt.capitalize(myName)).toMatch(/Jehu/);
 })
