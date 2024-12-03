@@ -22,28 +22,27 @@ const calculator = {
 }
 
 function caesarCipher(string, shift) {
-  const lower = string.toLowerCase();
-  const alphabet = [
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-  ]
   const newString = [];
-  const hasPunctuation = /[.,;:'"!?()-\s]{1,}/;
-  for (let i = 0; i < lower.length; i++) {
-    let curr;
-    if (hasPunctuation.test(lower.charAt(i))) {
-      curr = lower.charAt(i);
+  
+  shift = ((shift % 26) + 26) % 26;
+
+  for (let i = 0; i < string.length; i++) {
+    const char = string[i];
+    if (/[a-zA-Z]/.test(char)) {
+      const isUpperCase = char === char.toUpperCase();
+      const baseCharCode = isUpperCase ? 65 : 97; // ASCII codes for 'A' and 'a'
+            const newChar = String.fromCharCode(
+        ((char.charCodeAt(0) - baseCharCode + shift) % 26) + baseCharCode
+      );
+      newString.push(newChar);
     } else {
-      const index = (lower.charAt(i).charCodeAt(0) - 97 + shift) % 26;
-      curr = alphabet[index];
-      if (string.charAt(i) === string.charAt(i).toUpperCase()) {
-        curr = curr.toUpperCase()
-      }
+      newString.push(char);
     }
-    newString.push(curr);
   }
 
   return newString.join('');
 }
+
 
 function analyzeArray(array) {
   let max = array[0], min = array[0], sum = 0, length = 0;
